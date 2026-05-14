@@ -1,164 +1,23 @@
-Centro Universitário Barão de Mauá
-Técnicas de Programação II
-Prof. Felipe Carvalho Pellison
-Trabalho II
-Na SAV da disciplina de Técnicas de Programação II, está disponível o arquivo
-netflix_titles.csv, contendo informações sobre o catálogo da plataforma Netflix. Cada
-linha deste arquivo corresponde a um título disponibilizado na plataforma — podendo ser
-um filme (Movie) ou uma série (TV Show).
-Cada registro contém os seguintes campos:
-• show_id: identificador único do título;
-• type: tipo do conteúdo (Movie ou TV Show);
-• title: título do conteúdo;
-• director: nome do(s) diretor(es);
-• cast: elenco principal;
-• country: país(es) de produção;
-• date_added: data em que o título foi adicionado ao catálogo da Netflix;
-• release_year: ano de lançamento;
-• rating: classificação indicativa (ex.: PG, TV-MA, R, TV-14, etc.);
-• duration: duração — em minutos para filmes, ou em número de temporadas para
-séries;
-• listed_in: categorias/gêneros nos quais o título está listado; e
-• description: sinopse do título.
-Atenção ao formato do arquivo: o arquivo utiliza vírgula (,) como separador de
-campos. Campos que contenham vírgulas em seu conteúdo estão delimitados por
-aspas duplas ("). Existem registros em que nem todos os campos estão presentes —
-a ausência de um campo pode ser indicada por dois separadores consecutivos ou
-pelo valor vazio entre aspas ("").
-Solicita-se para este trabalho elaborar um programa, escrito em linguagem C++, que
-realize as seguintes tarefas:
-Tarefa 1 — Leitura e armazenamento dos dados
-Leia todos os registros do arquivo netflix_titles.csv e armazene-os na memória principal
-utilizando uma estrutura de dados fundamentada em struct. O número de registros não
-deve ser fixo no código-fonte; o programa deve primeiro contar as linhas do arquivo para
-então alocar dinamicamente o vetor de structs com o tamanho exato necessário.
-Exemplo de saída esperada ao final da leitura:
-Registros carregados: 3000
-Filmes: 2000 | Series: 1000
-Tarefa 2 — Ranking de países produtores
-O campo country pode conter um ou mais países, separados por vírgula. Para esta tarefa,
-considere apenas o primeiro país listado em cada registro (país de produção principal).
-O programa deve exibir um ranking com os 10 países que mais produziram conteúdo
-no catálogo, separando a contagem entre filmes e séries. Exemplo de saída esperada:
-=== Top 10 Paises Produtores ===
-1. United States : 3690 titulos (Filmes: 2818 | Series: 872)
-2. India : 1046 titulos (Filmes: 972 | Series: 74)
-3. United Kingdom : 806 titulos (Filmes: 520 | Series: 286)
-...
-O vetor utilizado para acumular as contagens por país deve ser alocado dinamicamente.
-Tarefa 3 — Análise da classificação indicativa por ano
-Elabore, ano a ano, a totalização de títulos para cada uma das classificações indicativas
-(rating) presentes no arquivo. O resultado deve ser exibido em formato de tabela, como
-no exemplo abaixo:
-Ano | TV-MA | TV-14 | TV-PG | R | PG-13 | ...
-2021 | 119 | 87 | 42 | 201 | 95 | ...
-2020 | 180 | 112 | 38 | 220 | 110 | ...
-...
-As colunas da tabela (classificações) devem ser descobertas dinamicamente a partir dos
-dados do arquivo — não é permitido fixar os nomes das classificações no código-fonte.
-Todos os vetores e matrizes utilizados nesta tarefa devem ser alocados dinamicamente.
-Tarefa 4 — Busca por ator ou diretor
-O programa deve permitir ao usuário realizar uma busca por nome (ou parte do nome)
-de um ator ou diretora. O programa deve:
-1. Receber a palavra-chave digitada pelo usuário;
-2. Buscar nos campos cast e director de todos os registros;
-3. Exibir os títulos encontrados com as seguintes informações: título, tipo
-(Movie/TV Show), ano de lançamento, classificação indicativa e país de
-produção.
-Exemplo:
-Busca por: "Spielberg"
-Titulos encontrados: 3
-- Indiana Jones and the Last Crusade | Movie | 1989 | PG | United States
-- Schindler's List | Movie | 1993 | R | United States
-- Saving Private Ryan | Movie | 1998 | R | United States
-Tarefa 5 — Análise de duração
-Para os filmes (type = Movie), o campo duration contém a duração em minutos (ex.: 90
-min). Para as séries (type = TV Show), contém o número de temporadas (ex.: 2 Seasons
-ou 1 Season).
-O programa deve:
-1. Calcular e exibir a duração média dos filmes (em minutos);
-2. Exibir o filme de maior e o de menor duração (com título e duração);
-3. Calcular e exibir a média de temporadas das séries;
-4. Exibir a série com o maior número de temporadas (com título e quantidade).
-Tarefa 6 — Geração de relatório por gênero
-O campo listed_in pode conter múltiplos gêneros separados por vírgula (ex.: "Crime TV
-Shows, International TV Shows, TV Action & Adventure").
-O programa deve:
-1. Descobrir dinamicamente todos os gêneros presentes no arquivo;
-2. Receber do usuário o nome de um gênero (ou parte dele);
-3. Gerar um arquivo de saída chamado relatorio_genero.csv contendo todos os
-títulos daquele gênero, com os campos: title, type, release_year, rating, country e
-duration.
-O arquivo gerado deve ter uma linha de cabeçalho e usar ; como separador.
-Critérios de correção do trabalho:
-1. Leitura e tratamento do arquivo CSV
-Avalia a capacidade de abrir, percorrer e interpretar corretamente o arquivo
-netflix_titles.csv, respeitando o padrão CSV (delimitadores, campos entre aspas,
-vírgulas internas a campos, registros incompletos e valores ausentes). Considera a
-robustez do parser frente aos casos especiais presentes no dataset e a fidelidade dos
-dados carregados em memória em relação ao conteúdo original do arquivo.
-2. Alocação dinâmica e gerenciamento de memória
-Avalia o uso correto e consistente de alocação dinâmica de memória para todas
-as estruturas (vetores e matrizes). Considera o dimensionamento adequado das
-estruturas (sem tamanhos fixos no código-fonte), a liberação correta da memória ao
-final da execução e a ausência de vazamentos, acessos inválidos ou uso indevido de
-containers da STL.
-3. Corretude lógica e algorítmica das tarefas
-Avalia se cada uma das seis tarefas produz resultados corretos para o conjunto de
-dados fornecido: contagens precisas, ranqueamentos corretos, tabelas com totais
-consistentes, buscas que retornam todos os registros pertinentes, cálculos estatísticos 
-(médias, mínimos e máximos) corretos e geração fiel do arquivo de saída. Considera
-ainda o tratamento adequado de casos limite, como campos vazios, registros sem país
-ou sem diretor, e duplicidade de gêneros/classificações.
-4. Organização modular e qualidade do código
-Avalia a divisão do programa em funções/procedimentos coesos e com
-responsabilidade única, a clareza dos nomes de variáveis e funções, o uso de
-assinaturas de função coerentes (parâmetros por valor, referência ou ponteiro
-conforme a necessidade), a indentação consistente, a presença de comentários
-explicativos nos pontos não triviais e o cabeçalho de identificação dos autores.
-Considera também a ausência de código duplicado e a separação clara entre leitura,
-processamento e exibição/escrita dos dados.
-5. Interface, robustez e apresentação dos resultados
-Avalia a clareza da interação com o usuário (menus, mensagens de entrada e
-mensagens de erro), a aderência das saídas aos formatos exemplificados no enunciado
-(alinhamento das colunas, cabeçalhos, separadores), o tratamento de entradas
-inválidas (gênero/diretor inexistente, arquivo não encontrado, palavra-chave vazia) e
-a correta geração do arquivo relatorio_genero.csv em conformidade com o formato
-especificado. Considera ainda a estabilidade do programa durante a execução
-completa, sem travamentos ou encerramentos inesperados.
-Escala de correção para cada critério (somando no máximo 20 pontos):
-Nível Pontuação Descrição do Desempenho
-Pleno 5 Atende a todos os requisitos do objetivo de forma correta e
-otimizada.
-Suficiente 4 Identifica os conceitos e resolve o problema, com falhas
-mínimas de precisão.
-Parcial 3 Demonstra compreensão, mas comete erros conceituais.
-Mínimo 2 Demonstra conhecimento básico, mas não consegue
-concluir a análise ou a implementação.
-Insuficiente 1 Participação ou entrega superficial, com graves lacunas de
-compreensão.
-Não atendeu 0 Não realizou a atividade ou o trabalho apresenta plágio.
-Atenção!
-● Serão permitidos grupos de 3 alunos que deverão ser definidos e informados na
-SAV da disciplina até 23:58h do dia 08/05/2026. Após esta data não será
-permitida a mudança de grupos. Casos omissos serão tratados pelo docente.
-● Entrega: 30/05/2026 contendo todos os códigos fontes, devidamente
-documentados, até às 23:58h via Portal (SAV da disciplina TP2);
-● Não serão aceitos trabalhos:
-o após a data e horário de entrega;
-o que utilizem códigos em outra linguagem de programação, senão C++;
-o que utilizem containers (vector, queue, stack, priority_queue, list, set,
-map...), bem como declarações de variáveis/ponteiros com auto type.
-o que utilizem outras bibliotecas/repositórios exceto a biblioteca padrão de
-C++ (https://en.cppreference.com/w/cpp/header).
-● O código deve ser organizado de forma modular, usando funções/procedimentos.
-● Opcionalmente, os programas resultantes do trabalho poderão serem testados na
-presença do professor durante o horário da aula de TP2 seguinte à data de entrega;
-● O código fonte (nome-a-escolher.cpp) deve conter, nas suas primeiras linhas, um
-campo de comentário com o nome e o número institucional de todos os
-responsáveis pelo trabalho;
-● Trabalhos reconhecidos como ‘muito semelhantes’ pela sua estrutura de
-programação serão desconsiderados. Lembrem-se, variáveis com nomes
-diferentes, mas em códigos com a mesma estrutura, são considerados ‘muito
-semelhantes’;
-Bom trabalho!
+Centro Universitário Barão de Mauá Técnicas de Programação II Prof. Felipe Carvalho Pellison Trabalho II Na SAV da disciplina de Técnicas de Programação II, está disponível o arquivo netflix_titles.csv, contendo informações sobre o catálogo da plataforma Netflix. Cada linha deste arquivo corresponde a um título disponibilizado na plataforma — podendo ser um filme (Movie) ou uma série (TV Show). Cada registro contém os seguintes campos: • show_id: identificador único do título; • type: tipo do conteúdo (Movie ou TV Show); • title: título do conteúdo; • director: nome do(s) diretor(es); • cast: elenco principal; • country: país(es) de produção; • date_added: data em que o título foi adicionado ao catálogo da Netflix; • release_year: ano de lançamento; • rating: classificação indicativa (ex.: PG, TV-MA, R, TV-14, etc.); • duration: duração — em minutos para filmes, ou em número de temporadas para séries; • listed_in: categorias/gêneros nos quais o título está listado; e • description: sinopse do título. Atenção ao formato do arquivo: o arquivo utiliza vírgula (,) como separador de campos. Campos que contenham vírgulas em seu conteúdo estão delimitados por aspas duplas ("). Existem registros em que nem todos os campos estão presentes — a ausência de um campo pode ser indicada por dois separadores consecutivos ou pelo valor vazio entre aspas (""). Solicita-se para este trabalho elaborar um programa, escrito em linguagem C++, que realize as seguintes tarefas: Tarefa 1 — Leitura e armazenamento dos dados Leia todos os registros do arquivo netflix_titles.csv e armazene-os na memória principal utilizando uma estrutura de dados fundamentada em struct. O número de registros não deve ser fixo no código-fonte; o programa deve primeiro contar as linhas do arquivo para então alocar dinamicamente o vetor de structs com o tamanho exato necessário. Exemplo de saída esperada ao final da leitura: Registros carregados: 3000 Filmes: 2000 | Series: 1000 Tarefa 2 — Ranking de países produtores O campo country pode conter um ou mais países, separados por vírgula. Para esta tarefa, considere apenas o primeiro país listado em cada registro (país de produção principal). O programa deve exibir um ranking com os 10 países que mais produziram conteúdo no catálogo, separando a contagem entre filmes e séries. Exemplo de saída esperada: === Top 10 Paises Produtores ===
+
+United States : 3690 titulos (Filmes: 2818 | Series: 872)
+India : 1046 titulos (Filmes: 972 | Series: 74)
+United Kingdom : 806 titulos (Filmes: 520 | Series: 286) ... O vetor utilizado para acumular as contagens por país deve ser alocado dinamicamente. Tarefa 3 — Análise da classificação indicativa por ano Elabore, ano a ano, a totalização de títulos para cada uma das classificações indicativas (rating) presentes no arquivo. O resultado deve ser exibido em formato de tabela, como no exemplo abaixo: Ano | TV-MA | TV-14 | TV-PG | R | PG-13 | ... 2021 | 119 | 87 | 42 | 201 | 95 | ... 2020 | 180 | 112 | 38 | 220 | 110 | ... ... As colunas da tabela (classificações) devem ser descobertas dinamicamente a partir dos dados do arquivo — não é permitido fixar os nomes das classificações no código-fonte. Todos os vetores e matrizes utilizados nesta tarefa devem ser alocados dinamicamente. Tarefa 4 — Busca por ator ou diretor O programa deve permitir ao usuário realizar uma busca por nome (ou parte do nome) de um ator ou diretora. O programa deve:
+Receber a palavra-chave digitada pelo usuário;
+Buscar nos campos cast e director de todos os registros;
+Exibir os títulos encontrados com as seguintes informações: título, tipo (Movie/TV Show), ano de lançamento, classificação indicativa e país de produção. Exemplo: Busca por: "Spielberg" Titulos encontrados: 3
+Indiana Jones and the Last Crusade | Movie | 1989 | PG | United States
+Schindler's List | Movie | 1993 | R | United States
+Saving Private Ryan | Movie | 1998 | R | United States Tarefa 5 — Análise de duração Para os filmes (type = Movie), o campo duration contém a duração em minutos (ex.: 90 min). Para as séries (type = TV Show), contém o número de temporadas (ex.: 2 Seasons ou 1 Season). O programa deve:
+Calcular e exibir a duração média dos filmes (em minutos);
+Exibir o filme de maior e o de menor duração (com título e duração);
+Calcular e exibir a média de temporadas das séries;
+Exibir a série com o maior número de temporadas (com título e quantidade). Tarefa 6 — Geração de relatório por gênero O campo listed_in pode conter múltiplos gêneros separados por vírgula (ex.: "Crime TV Shows, International TV Shows, TV Action & Adventure"). O programa deve:
+Descobrir dinamicamente todos os gêneros presentes no arquivo;
+Receber do usuário o nome de um gênero (ou parte dele);
+Gerar um arquivo de saída chamado relatorio_genero.csv contendo todos os títulos daquele gênero, com os campos: title, type, release_year, rating, country e duration. O arquivo gerado deve ter uma linha de cabeçalho e usar ; como separador. Critérios de correção do trabalho:
+Leitura e tratamento do arquivo CSV Avalia a capacidade de abrir, percorrer e interpretar corretamente o arquivo netflix_titles.csv, respeitando o padrão CSV (delimitadores, campos entre aspas, vírgulas internas a campos, registros incompletos e valores ausentes). Considera a robustez do parser frente aos casos especiais presentes no dataset e a fidelidade dos dados carregados em memória em relação ao conteúdo original do arquivo.
+Alocação dinâmica e gerenciamento de memória Avalia o uso correto e consistente de alocação dinâmica de memória para todas as estruturas (vetores e matrizes). Considera o dimensionamento adequado das estruturas (sem tamanhos fixos no código-fonte), a liberação correta da memória ao final da execução e a ausência de vazamentos, acessos inválidos ou uso indevido de containers da STL.
+Corretude lógica e algorítmica das tarefas Avalia se cada uma das seis tarefas produz resultados corretos para o conjunto de dados fornecido: contagens precisas, ranqueamentos corretos, tabelas com totais consistentes, buscas que retornam todos os registros pertinentes, cálculos estatísticos (médias, mínimos e máximos) corretos e geração fiel do arquivo de saída. Considera ainda o tratamento adequado de casos limite, como campos vazios, registros sem país ou sem diretor, e duplicidade de gêneros/classificações.
+Organização modular e qualidade do código Avalia a divisão do programa em funções/procedimentos coesos e com responsabilidade única, a clareza dos nomes de variáveis e funções, o uso de assinaturas de função coerentes (parâmetros por valor, referência ou ponteiro conforme a necessidade), a indentação consistente, a presença de comentários explicativos nos pontos não triviais e o cabeçalho de identificação dos autores. Considera também a ausência de código duplicado e a separação clara entre leitura, processamento e exibição/escrita dos dados.
+Interface, robustez e apresentação dos resultados Avalia a clareza da interação com o usuário (menus, mensagens de entrada e mensagens de erro), a aderência das saídas aos formatos exemplificados no enunciado (alinhamento das colunas, cabeçalhos, separadores), o tratamento de entradas inválidas (gênero/diretor inexistente, arquivo não encontrado, palavra-chave vazia) e a correta geração do arquivo relatorio_genero.csv em conformidade com o formato especificado. Considera ainda a estabilidade do programa durante a execução completa, sem travamentos ou encerramentos inesperados. Escala de correção para cada critério (somando no máximo 20 pontos): Nível Pontuação Descrição do Desempenho Pleno 5 Atende a todos os requisitos do objetivo de forma correta e otimizada. Suficiente 4 Identifica os conceitos e resolve o problema, com falhas mínimas de precisão. Parcial 3 Demonstra compreensão, mas comete erros conceituais. Mínimo 2 Demonstra conhecimento básico, mas não consegue concluir a análise ou a implementação. Insuficiente 1 Participação ou entrega superficial, com graves lacunas de compreensão. Não atendeu 0 Não realizou a atividade ou o trabalho apresenta plágio. Atenção! ● Serão permitidos grupos de 3 alunos que deverão ser definidos e informados na SAV da disciplina até 23:58h do dia 08/05/2026. Após esta data não será permitida a mudança de grupos. Casos omissos serão tratados pelo docente. ● Entrega: 30/05/2026 contendo todos os códigos fontes, devidamente documentados, até às 23:58h via Portal (SAV da disciplina TP2); ● Não serão aceitos trabalhos: o após a data e horário de entrega; o que utilizem códigos em outra linguagem de programação, senão C++; o que utilizem containers (vector, queue, stack, priority_queue, list, set, map...), bem como declarações de variáveis/ponteiros com auto type. o que utilizem outras bibliotecas/repositórios exceto a biblioteca padrão de C++ (https://en.cppreference.com/w/cpp/header). ● O código deve ser organizado de forma modular, usando funções/procedimentos. ● Opcionalmente, os programas resultantes do trabalho poderão serem testados na presença do professor durante o horário da aula de TP2 seguinte à data de entrega; ● O código fonte (nome-a-escolher.cpp) deve conter, nas suas primeiras linhas, um campo de comentário com o nome e o número institucional de todos os responsáveis pelo trabalho; ● Trabalhos reconhecidos como ‘muito semelhantes’ pela sua estrutura de programação serão desconsiderados. Lembrem-se, variáveis com nomes diferentes, mas em códigos com a mesma estrutura, são considerados ‘muito semelhantes’; Bom trabalho!
